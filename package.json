@@ -1,0 +1,14 @@
+{
+  "name": "dsl-task",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
