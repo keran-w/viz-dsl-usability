@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.html",
   "scripts": {
-    "start": "lite-server"
+    "start": "lite-server --config bs-config.json"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "lite-server": "^2.6.1"
-  }
+  },
+  "dependencies": {}
 }

@@ -1,7 +1,19 @@
 body {
   background: #fff;
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
+}
+
+
+table {
+  width: 800px;
+  border-collapse: collapse;
+}
+
+th,td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
 }

@@ -1,0 +1,9 @@
+{
+  "server": {
+    "baseDir": "./",
+    "routes": {
+      "/index.html": "index",
+      "/vegaTest.html": "vegaTest.html"
+    }
+  }
+}

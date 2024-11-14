@@ -6,13 +6,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="src/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+
+  <script type="module" src="src/script.js"></script>
+  <script type="module" src="src/answers/VegaLite-T1.js"></script>
+  <script type="module" src="src/answers/VegaLite-T2.js"></script>
+  <script type="module" src="src/answers/VegaLite-T3.js"></script>
+  <script type="module" src="src/answers/VegaLite-T4.js"></script>
+  <script type="module" src="src/answers/chartjs-T1.js"></script>
+  <script type="module" src="src/answers/chartjs-T2.js"></script>
+  <script type="module" src="src/answers/chartjs-T3.js"></script>
+  <script type="module" src="src/answers/chartjs-T4.js"></script>
 </head>
 
 <body>
-  <h1 id="header"></h1>
-  <img id="chart-image" width="800px">
+  <div>
+    <h1 id="header">Vis-DSL Testbench</h1>
+  </div>
+  <table>
+    <tr>
+      <td>
+        <div id="VegaLite-T1"></div>
+      </td>
+      <td>
+        <div id="VegaLite-T2"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="VegaLite-T3"></div>
+      </td>
+      <td>
+        <div id="VegaLite-T4"></div>
+      </td>
+    </tr>
+  </table>
 
-  <script type="module" src="src/script.js"></script>
+  <table>
+    <tr>
+      <td>
+        <div>
+          <canvas id="chartjs-T1" width="400px" height="200px"></canvas>
+        </div>
+      </td>
+      <td>
+        <div>
+          <canvas id="chartjs-T2" width="400px" height="200px"></canvas>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>
+          <canvas id="chartjs-T3" width="400px" height="200px"></canvas>
+        </div>
+      </td>
+      <td>
+        <div>
+          <canvas id="chartjs-T4" width="400px" height="300px"></canvas>
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
 
 </html>

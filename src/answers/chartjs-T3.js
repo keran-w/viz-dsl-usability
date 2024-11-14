@@ -1,74 +1,8 @@
-import { getCarData } from "./data/index.js";
-
-/**
- * Example car data:
-    [
-        {
-            "Name":"chevrolet chevelle malibu",
-            "Miles_per_Gallon":18,
-            "Cylinders":8,
-            "Displacement":307,
-            "Horsepower":130,
-            "Weight_in_lbs":3504,
-            "Acceleration":12,
-            "Year":"1970-01-01",
-            "Origin":"USA"
-        },
-        ...
-    ]
-*/
-
+import { getCarData } from "../data/index.js";
 const carData = await getCarData();
-const originCount = carData.reduce((acc, car) => {
-  acc[car.Origin] = (acc[car.Origin] || 0) + 1;
-  return acc;
-}, {});
-
-const labels = Object.keys(originCount);
-const dataValues = Object.values(originCount);
-
 const backgroundColors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
-const taskTwoConfig = {
-  type: "bar",
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: "Number of Cars",
-        data: dataValues,
-        backgroundColor: backgroundColors,
-      },
-    ],
-  },
-  options: {
-    legend: {
-      display: false,
-    },
-    scales: {
-      xAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: "Origin",
-          },
-        },
-      ],
-      yAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: "Number of Cars",
-          },
-        },
-      ],
-    },
-  },
-};
-
-const taskOneConfig = JSON.parse(JSON.stringify(taskTwoConfig));
-taskOneConfig.type = "pie";
-taskOneConfig.options = {};
+// Your code start here
 
 const USACars = carData.filter((car) => car.Origin === "USA");
 const JapanCars = carData.filter((car) => car.Origin === "Japan");
@@ -122,14 +56,14 @@ const dataRes = {
   ],
 };
 
-const taskThreeConfig = {
+const Config = {
   type: "scatter",
-  data: dataOri,
-  // data: dataRes,
+  // data: dataOri,
+  data: dataRes,
   options: {
-    legend: {
-      display: false,
-    },
+    // legend: {
+    //   display: false,
+    // },
     scales: {
       xAxes: [
         {
@@ -151,5 +85,6 @@ const taskThreeConfig = {
   },
 };
 
-export default taskTwoConfig;
-export { taskOneConfig, taskTwoConfig, taskThreeConfig };
+const ctx = document.getElementById("chartjs-T3");
+
+new Chart(ctx, Config);
