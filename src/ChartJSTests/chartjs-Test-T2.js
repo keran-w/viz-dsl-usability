@@ -21,7 +21,7 @@ const carData = await getCarData();
    }, ...
 
  * For the second task, you should create a figure that have the exact specification as the following:
- * <REPLACE THIS WITH URL!!!!!!!>
+ * https://drive.google.com/file/d/1q4Bvme59hzIY1cBGJHw5pAePeCTxs7tW (top-right chart)
     - Show the visual proportion of cars from different origins
 
  * To finish this task, please replace the skeleton code with your own code from Task 1.

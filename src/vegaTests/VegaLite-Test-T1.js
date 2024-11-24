@@ -16,7 +16,7 @@ const carData = await getCarData();
       "Origin":"USA"
    }, ...
 * For the first task, you should create a figure that have the exact specification as the following:
-* <REPLACE THIS WITH URL!!!!!!!>
+* https://drive.google.com/file/d/19RfCqzIhvkCZuEY5e1XENArnJLOxzmZb (top-left chart)
   - The x-axis is the country of origin (Origin attribute)
   - The y-axis is the count of cars from each country
 
