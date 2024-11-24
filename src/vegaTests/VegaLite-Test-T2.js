@@ -36,13 +36,21 @@ let vlSpec = {
   data: {
     values: carData,
   },
-  // Your code modification starts here ...
-  mark: "",
-  transform: [{}],
-  encoding: {},
-  // Your code modification ends here ...
-  width: 200,
+  transform: [{
+    aggregate: [{ op: "count", as: "Number of Cars", field: "Origin" }],
+    groupby: ["Origin"]
+  }],
+  mark: "arc",
+  // encoding: {
+  //   x: { field: "Origin", type: "nominal" },
+  //   y: { field: "Number of Cars", type: "quantitative" }
+  // },
+  "encoding": {
+    "color": {"field": "Origin", "type": "nominal"},
+    "theta": {"field": "Number of Cars", "type": "quantitative"}
+  },
+  width: 400,
   height: 200,
-};
+}
 
 vegaEmbed("#VegaLite-T2", vlSpec);

@@ -1,6 +1,8 @@
 import { getCarData } from "../data/index.js";
 const carData = await getCarData();
 
+console.log(carData);
+
 /*
 * Task 1: Create a bar chart using Vega-Lite
 * You will be working on a dataset named Cars. The specification of Cars is as follows:
@@ -29,20 +31,37 @@ const carData = await getCarData();
   but we will provide necessary assistance if your question is not related to the task.
 */
 
+// let vlSpec = {
+//   data: {
+//     values: carData,
+//   },
+//   // Your code modification starts here ...
+//   mark: "",
+//   transform: [{}],
+//   encoding: {
+//     x: {},
+//     y: {},
+//   },
+//   // Your code modification ends here ...
+//   width: 400,
+//   height: 200,
+// };
+
 let vlSpec = {
   data: {
     values: carData,
   },
-  // Your code modification starts here ...
-  mark: "",
-  transform: [{}],
+  transform: [{
+    aggregate: [{ op: "count", as: "Number of Cars", field: "Origin" }],
+    groupby: ["Origin"]
+  }],
+  mark: "bar",
   encoding: {
-    x: {},
-    y: {},
+    x: { field: "Origin", type: "nominal" },
+    y: { field: "Number of Cars", type: "quantitative" }
   },
-  // Your code modification ends here ...
   width: 400,
   height: 200,
-};
+}
 
 vegaEmbed("#VegaLite-T1", vlSpec);

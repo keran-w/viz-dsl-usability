@@ -32,11 +32,27 @@ let vlSpec = {
   data: {
     values: carData,
   },
-  // Your code implementation starts here ...
-
-  // Your code implementation ends here ...
+  repeat: {
+    layer: ["Acceleration", "Miles_per_Gallon"],
+  },
+  spec: {
+    mark: "line",
+    encoding: {
+      x: { timeUnit: "yearmonth", field: "Year", "axis": { "domain": false, "format": "%Y", "tickSize": 0 } },
+      y: {
+        aggregate: "average",
+        field: { repeat: "layer" },
+        type: "quantitative",
+        title: "Average Acceleration and Miles per Gallon",
+      },
+      color: {
+        datum: { repeat: "layer" },
+        type: "nominal"
+      }
+    }
+  },
   width: 400,
-  height: 200,
+  height: 200
 };
 
 vegaEmbed("#VegaLite-T4", vlSpec);

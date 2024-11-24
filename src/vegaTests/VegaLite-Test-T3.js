@@ -44,6 +44,8 @@ let vlSpec = {
       type: "quantitative",
       title: "Miles per Gallon (MPG)",
     },
+    color: { field: "Origin", type: "nominal" },
+    size: { field: "Cylinders", type: "quantitative" },
   },
   // Your code modification ends here ...
   width: 400,
