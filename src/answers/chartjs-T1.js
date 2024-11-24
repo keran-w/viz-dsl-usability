@@ -1,53 +1,49 @@
 import { getCarData } from "../data/index.js";
-const carData = await getCarData();
-const backgroundColors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
-// Your code start here
+const ctx = document.getElementById('chartjs-T1');
+const carData = await getCarData();
+const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
+
 const originCount = carData.reduce((acc, car) => {
-  acc[car.Origin] = (acc[car.Origin] || 0) + 1;
-  return acc;
+    acc[car.Origin] = (acc[car.Origin] || 0) + 1;
+    return acc;
 }, {});
 
 const labels = Object.keys(originCount);
 const dataValues = Object.values(originCount);
 
-const Config = {
-  type: "bar",
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: "Number of Cars",
-        data: dataValues,
-        backgroundColor: backgroundColors,
-      },
-    ],
-  },
-  options: {
-    legend: {
-      display: false,
+const config = {
+    type: "bar",
+    data: {
+        labels: labels,
+        datasets: [
+            {
+                data: dataValues,
+                backgroundColor: colors,
+            },
+        ],
     },
-    scales: {
-      xAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: "Country of Origin",
-          },
+    options: {
+        plugins: {
+            legend: {
+                display: false,
+            },
         },
-      ],
-      yAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: "Number of Cars",
-          },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: "Country of Origin",
+                },
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: "Number of Cars",
+                },
+            },
         },
-      ],
     },
-  },
 };
 
-const ctx = document.getElementById("chartjs-T1");
-
-new Chart(ctx, Config);
+new Chart(ctx, config);

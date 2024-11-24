@@ -3,7 +3,8 @@
     "baseDir": "./",
     "routes": {
       "/index.html": "index",
-      "/vegaTest.html": "vegaTest.html"
+      "/vegaTest.html": "vegaTest.html",
+      "/chartjsTest.html": "chartjsTest.html"
     }
   }
 }
