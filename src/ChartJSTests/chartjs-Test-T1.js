@@ -35,7 +35,7 @@ const carData = await getCarData();
  */
 
 /* color palette */
-const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"]; x
+const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
 /* Your code modification starts here ... */
 const originCount = "Please replace this string with your code";

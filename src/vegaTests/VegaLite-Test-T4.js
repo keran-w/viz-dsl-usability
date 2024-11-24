@@ -17,7 +17,7 @@ const carData = await getCarData();
    }, ...
 
 * You are free to choose what type of visualization you want to create, and the style you want to present your insight.
-* However, your exploaration should follow the following constraints:
+* However, your exploration should follow the following constraints:
   - You should use the Year field to explore the temporal dynamics of the dataset.
   - You should use at least 2 different variables and show how it changes over time.
 

@@ -18,7 +18,7 @@ const carData = await getCarData();
 
 * For the third task, you should modify a current chart that have the exact specification as the following:
 * <REPLACE THIS WITH URL!!!!!!!>
-  - Show categorizaton of cars by origin
+  - Show categorization of cars by origin
   - Show the number of cylinders with the sizes of points
 
 
