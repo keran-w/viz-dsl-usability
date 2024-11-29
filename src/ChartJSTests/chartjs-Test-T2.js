@@ -41,11 +41,35 @@ const carData = await getCarData();
 const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
 /* Your code modification starts here ... */
-const originCount = "Please replace this string with your code";
+/* Count cars by country of origin */
+const originCount = carData.reduce((acc, car) => {
+  acc[car.Origin] = (acc[car.Origin] || 0) + 1;
+  return acc;
+}, {});
+
+/* Prepare pie chart data */
 const config = {
-   type: "",
-   data: {},
-   options: {},
+  type: "pie", // Change the chart type to 'pie'
+  data: {
+    labels: Object.keys(originCount), // ["USA", "Europe", "Japan"]
+    datasets: [
+      {
+        label: "Number of Cars",
+        data: Object.values(originCount), // [250, 100, 100]
+        backgroundColor: colors, // Colors for each section of the pie
+        borderWidth: 1, // Adds a thin border between slices
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true, // Display the legend
+        position: "top", // Position the legend at the top
+      },
+    },
+  },
 };
 /* Your code modification ends here ... */
 

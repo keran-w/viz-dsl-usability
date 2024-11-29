@@ -40,22 +40,38 @@ const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
 
 /* Your code modification starts here ... */
-const dataRes = {
-    datasets: [
-        {
-            label: "All cars",
-            data: carData.map((car) => ({
-                x: car.Horsepower,
-                y: car.Miles_per_Gallon,
-            })),
-        },
-    ],
-};
+const groupedData = carData.reduce((acc, car) => {
+  const index = ["USA", "Japan", "Europe"].indexOf(car.Origin);
+  if (index !== -1) {
+    acc[index] = acc[index] || [];
+    acc[index].push({
+      x: car.Horsepower,       // X-axis: Horsepower
+      y: car.Miles_per_Gallon, // Y-axis: Miles_per_Gallon
+      r: car.Cylinders,    // Bubble size scaled by Cylinders
+    });
+  }
+  return acc;
+}, []);
 
-const config = {
-    type: "scatter",
+const dataRes = {
+  datasets: groupedData.map((data, index) => ({
+    label: ["USA", "Japan", "Europe"][index],
+    data: data,
+    backgroundColor: "transparent", 
+    borderColor: colors[index],
+}))};
+
+const config = { 
+    type: "bubble",
     data: dataRes,
     options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+          },
+        },
         scales: {
             x: {
                 title: {

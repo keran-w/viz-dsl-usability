@@ -38,11 +38,47 @@ const carData = await getCarData();
 const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
 /* Your code modification starts here ... */
-const originCount = "Please replace this string with your code";
+/* Count cars by country of origin */
+const originCount = carData.reduce((acc, car) => {
+  acc[car.Origin] = (acc[car.Origin] || 0) + 1;
+  return acc;
+}, {});
+
+/* Prepare chart data */
 const config = {
-   type: "",
-   data: {},
-   options: {},
+  type: "bar",
+  data: {
+     labels: Object.keys(originCount), // ["USA", "Europe", "Japan"]
+     datasets: [
+        {
+           label: "Number of Cars",
+           data: Object.values(originCount), // [250, 100, 100]
+           backgroundColor: colors,
+        },
+     ],
+  },
+  options: {
+     responsive: true,
+     plugins: {
+        legend: {
+           display: false,
+        },
+     },
+     scales: {
+        x: {
+           title: {
+              display: true,
+              text: "Country of Origin",
+           },
+        },
+        y: {
+           title: {
+              display: true,
+              text: "Number of Cars",
+           },
+        },
+     },
+  },
 };
 /* Your code modification ends here ... */
 

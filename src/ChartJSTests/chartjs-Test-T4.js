@@ -34,10 +34,55 @@ const carData = await getCarData();
 const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
 /* Your code modification starts here ... */
+
+
+/* Prepare radar chart data */
+/* Count cars by country of origin */
+const originCount = carData.reduce((acc, car) => {
+  const origin = car.Origin?.trim(); // Trim whitespace and normalize case
+  if (["USA", "Japan", "Europe"].includes(origin)) {
+    acc[origin] = (acc[origin] || 0) + 1;
+  }
+  return acc;
+}, {});
+
+/* Ensure all origins are represented, even if counts are 0 */
+const origins = ["USA", "Japan", "Europe"];
+origins.forEach((origin) => {
+  if (!originCount[origin]) originCount[origin] = 0;
+});
+
+/* Prepare Polar Area chart data */
 const config = {
-    type: "",
-    data: {},
-    options: {},
+  type: "polarArea", // Set chart type to 'polarArea'
+  data: {
+    labels: origins, // Labels for each segment: ["USA", "Japan", "Europe"]
+    datasets: [
+      {
+        label: "Number of Cars",
+        data: origins.map((origin) => originCount[origin]), // Data for each origin
+        backgroundColor: colors, // Colors for each segment of the polar chart
+        borderWidth: 1, // Thin border between sections
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true, // Display the legend
+        position: "top", // Position legend at the top
+      },
+    },
+    scales: {
+      r: {
+        beginAtZero: true, // Ensure chart starts at zero
+        ticks: {
+          stepSize: 10, // Step size for ticks
+        },
+      },
+    },
+  },
 };
 /* Your code modification ends here ... */
 
