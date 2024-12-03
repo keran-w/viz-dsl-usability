@@ -38,12 +38,67 @@ const carData = await getCarData();
 const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
 /* Your code modification starts here ... */
-const originCount = "Please replace this string with your code";
+/* Calculate the origin count */
+const originCount = carData.reduce((acc, car) => {
+  acc[car.Origin] = (acc[car.Origin] || 0) + 1;
+  return acc;
+}, {});
+
+// Prepare data for the chart
+const labels = Object.keys(originCount); // Unique origins (e.g., USA, Europe, Japan)
+const data = Object.values(originCount); // Count of cars for each origin
+
+/* Chart configuration */
 const config = {
-   type: "",
-   data: {},
-   options: {},
+  type: "bar", // Bar chart
+  data: {
+      labels: labels, // X-axis labels
+      datasets: [
+          {
+              label: "", // Empty label to match the design
+              data: data, // Data points
+              backgroundColor: colors, // Bar colors
+              // borderRadius: 5, // Rounded corners on bars
+              borderSkipped: false, // Remove border skips to match style
+          },
+      ],
+  },
+  options: {
+      responsive: true,
+      plugins: {
+          legend: {
+              display: false, // Hide legend to match the design
+          },
+          title: {
+              display: false, // Hide title to match the design
+          },
+      },
+      scales: {
+          x: {
+              title: {
+                  display: true,
+                  text: "Country of Origin", // X-axis label
+              },
+              grid: {
+                  display: true, // Hide x-axis gridlines
+              },
+          },
+          y: {
+              beginAtZero: true, // Start y-axis at 0
+              title: {
+                  display: true,
+                  text: "Number of Cars", // Y-axis label
+              },
+              grid: {
+                  color: "#eaeaea", // Light gray gridlines
+                  lineWidth: 1, // Thin gridlines
+              },
+          },
+      },
+  },
 };
+
+new Chart(ctx, config);
 /* Your code modification ends here ... */
 
 new Chart(ctx, config);

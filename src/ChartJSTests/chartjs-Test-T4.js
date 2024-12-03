@@ -3,42 +3,78 @@ import { getCarData } from "../data/index.js";
 const ctx = document.getElementById('chartjs-T4');
 const carData = await getCarData();
 
-/**
- * Task 4: Explore the temporal dynamics!
- * You will still be working the Cars dataset. The specification of Cars is as follows:
-    {
-        "Name":"ford ranger",
-        "Miles_per_Gallon":28,
-        "Cylinders":4,
-        "Displacement":120,
-        "Horsepower":79,
-        "Weight_in_lbs":2625,
-        "Acceleration":18.6,
-        "Year":"1982-01-01",
-        "Origin":"USA"
-    }, ...
-
- * You are free to choose what type of visualization you want to create, and the style you want to present your insight.
- * However, your exploration should follow the following constraints:
-    - You should use the Year field to explore the temporal dynamics of the dataset.
-    - You should use at least 2 different variables and show how it changes over time.
-
- * You can use the following references to help you:
-    - https://www.chartjs.org/docs/latest/charts/
-
- * While doing the task, please think aloud about your actions and the reasons behind them. We will not be interfering with your work, 
-   but we will provide necessary assistance if your question is not related to the task.
- */
-
 /* color palette */
 const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
 
-/* Your code modification starts here ... */
+// Process the data to group by year and calculate averages
+const yearData = {};
+carData.forEach(car => {
+    const year = new Date(car.Year).getFullYear();
+    if (!yearData[year]) {
+        yearData[year] = {
+            totalMilesPerGallon: 0,
+            totalHorsepower: 0,
+            count: 0
+        };
+    }
+    yearData[year].totalMilesPerGallon += car.Miles_per_Gallon || 0;
+    yearData[year].totalHorsepower += car.Horsepower || 0;
+    yearData[year].count += 1;
+});
+
+// Prepare data for the chart
+const years = Object.keys(yearData).sort((a, b) => a - b);
+const avgMilesPerGallon = years.map(year => yearData[year].totalMilesPerGallon / yearData[year].count);
+const avgHorsepower = years.map(year => yearData[year].totalHorsepower / yearData[year].count);
+
+// Chart.js configuration
 const config = {
-    type: "",
-    data: {},
-    options: {},
+    type: "line",
+    data: {
+        labels: years,
+        datasets: [
+            {
+                label: "Average Miles per Gallon",
+                data: avgMilesPerGallon,
+                borderColor: colors[0],
+                backgroundColor: colors[0],
+                fill: false
+            },
+            {
+                label: "Average Horsepower",
+                data: avgHorsepower,
+                borderColor: colors[1],
+                backgroundColor: colors[1],
+                fill: false
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top'
+            },
+            title: {
+                display: true,
+                text: 'Temporal Dynamics of Car Data'
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Year'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Value'
+                }
+            }
+        }
+    }
 };
-/* Your code modification ends here ... */
 
 new Chart(ctx, config);

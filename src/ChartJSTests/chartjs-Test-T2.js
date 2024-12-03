@@ -39,14 +39,35 @@ const carData = await getCarData();
 
 /* color palette */
 const colors = ["#48bbb5", "#fd8f48", "#fb4e7a"];
-
 /* Your code modification starts here ... */
-const originCount = "Please replace this string with your code";
-const config = {
-   type: "",
-   data: {},
-   options: {},
-};
-/* Your code modification ends here ... */
-
-new Chart(ctx, config);
+// Calculate the count of cars from each origin
+const originCount = carData.reduce((acc, car) => {
+   acc[car.Origin] = (acc[car.Origin] || 0) + 1;
+   return acc;
+ }, {});
+ 
+ // Configure the chart
+ const config = {
+   type: "pie", // or 'doughnut' if you prefer
+   data: {
+     labels: Object.keys(originCount),
+     datasets: [
+       {
+         data: Object.values(originCount),
+         backgroundColor: colors,
+       },
+     ],
+   },
+   options: {
+     responsive: true,
+     plugins: {
+       legend: {
+         position: "top",
+       },
+     },
+   },
+ };
+ /* Your code modification ends here ... */
+ 
+ new Chart(ctx, config);
+ 
